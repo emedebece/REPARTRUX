@@ -1,348 +1,147 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
-  <title>PAQUETRUX - Tus paquetes llegan Ya!</title>
+  <title>PAQUETRUX - Plataforma</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-image: url('attached_assets/IMG_4351.jpeg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: #fff;
       margin: 0;
-      padding: 1rem;
-      min-height: 100vh;
+      padding: 0;
     }
-
     .container {
-      max-width: 600px;
+      max-width: 700px;
       margin: auto;
-      background: transparent;
-      padding: 1.5rem;
-      color: white;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      padding: 2rem;
     }
-
-    h2,
-    h3 {
+    h2, h3 {
       text-align: center;
-      color: #222;
-      font-family: 'Impact', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      color: #00aaff;
     }
-
-    form {
-      margin-bottom: 2rem;
-    }
-
-    label {
-      display: block;
-      margin-top: 1rem;
+    input, button, select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
       font-weight: bold;
     }
-
-    input {
-      width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.3rem;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 3px;
-      font-size: 1rem;
-      background: rgba(0, 0, 0, 0.5);
-      color: white;
+    input, select {
+      border: 1px solid #ccc;
     }
-
-    input::placeholder {
-      color: rgba(255, 255, 255, 0.7);
-    }
-
     button {
-      margin-top: 1.5rem;
-      width: 100%;
-      padding: 0.7rem;
-      background-color: #25D366;
-      color: #fff;
-      border: none;
-      border-radius: 3px;
-      font-size: 1rem;
+      background-color: #00aaff;
+      color: white;
       cursor: pointer;
     }
-
-    button:hover {
-      background-color: #1ebe5b;
-    }
-
-    .order-item {
-      border-bottom: 1px solid #ccc;
-      padding: 0.5rem 0;
-    }
-
-    .order-item:last-child {
-      border-bottom: none;
-    }
-
-    .order-item p {
-      margin: 0.3rem 0;
-    }
-
-    .btn-reenviar {
-      background-color: #007bff;
-      margin-top: 0.5rem;
-      padding: 0.3rem 0.5rem;
-      font-size: 0.9rem;
-      border: none;
-      border-radius: 3px;
-      cursor: pointer;
-      color: #fff;
-    }
-
-    .btn-reenviar:hover {
-      background-color: #0056b3;
-    }
-
-    .logo {
-      display: block;
-      margin: 0 auto 20px;
-      max-width: 150px;
-    }
-
     .footer {
-      text-align: center;
       margin-top: 2rem;
-      padding: 1rem;
-      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between;
     }
-
-    .map {
-      width: 100%;
-      height: 300px;
-      border: none;
-      margin-top: 1rem;
+    .hidden {
+      display: none;
+    }
+    .panel {
+      display: none;
+    }
+    .notificacion {
+      background-color: #007acc;
+      padding: 10px;
+      margin: 10px 0;
       border-radius: 5px;
-    }
-
-    .repartidores-container {
-      margin-bottom: 2rem;
-    }
-
-    .repartidores-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .repartidor-btn {
-      padding: 0.6rem;
-      background-color: rgba(248, 249, 250, 0.9);
-      border: 2px solid #333;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-align: center;
-      line-height: 1.2;
-      font-size: 0.9rem;
-      font-family: 'Arial Black', sans-serif;
-      text-transform: uppercase;
-    }
-
-    .repartidor-btn:hover {
-      background-color: #333;
       color: white;
-      transform: translateY(-2px);
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-    }
-
-    .repartidor-btn.selected {
-      background-color: #25D366;
-      color: white;
-      border-color: #25D366;
     }
   </style>
 </head>
-
 <body>
-  <div id="startButton"
-    style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-    <button onclick="showContent()" style="
-      padding: 20px 40px;
-      font-size: 24px;
-      background-color: #25D366;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: transform 0.2s;
-    ">COMENZAR</button>
+  <div class="container" id="pantallaInicio">
+    <h2>PAQUETRUX</h2>
+    <p style="text-align: center;">¡Tus paquetes llegan Ya!</p>
+    <button onclick="mostrarLogin('negocio')">Soy un Negocio</button>
   </div>
 
-  <div id="mainContent" class="container" style="display: none;">
-    <div style="text-align: center;">
-      <span style="font-size: 4em; display: block;">📦</span>
+  <!-- LOGIN NEGOCIO -->
+  <div class="container panel" id="loginNegocio">
+    <h3>Iniciar Sesión - Negocio</h3>
+    <input type="text" placeholder="Usuario" id="userNegocio">
+    <input type="password" placeholder="Contraseña" id="passNegocio">
+    <button onclick="accederNegocio()">Ingresar</button>
+  </div>
+
+  <!-- PANEL NEGOCIO -->
+  <div class="container panel" id="panelNegocio">
+    <h2>Panel de Negocio</h2>
+    <div id="notificacionesNegocio"></div>
+    <h3>Nuevo Envío</h3>
+    <input type="text" placeholder="Código de paquete">
+    <input type="number" placeholder="Valor del envío">
+    <input type="text" placeholder="Dirección de origen">
+    <input type="text" placeholder="Dirección de destino">
+    <h4>Selecciona un Repartidor:</h4>
+    <select id="selectRepartidor">
+      <!-- Lista de repartidores se cargará aquí -->
+    </select>
+    <button onclick="enviarWhatsApp()">Enviar vía WhatsApp</button>
+
+    <h3>Agenda de Repartidores</h3>
+    <input type="text" id="nombreRepartidor" placeholder="Nombre del repartidor">
+    <input type="text" id="telefonoRepartidor" placeholder="Teléfono del repartidor">
+    <button onclick="agregarRepartidor()">Agregar Repartidor</button>
+
+    <h3>Seguimiento en Tiempo Real</h3>
+    <div id="seguimientoNegocio">
+      <p>Estado actual: <strong>Pendiente</strong></p>
     </div>
-    <h2 style="font-family: 'Palatino', serif; font-style: italic; font-size: 2.5em; text-transform: uppercase;">
-      PAQUETRUX</h2>
-    <p style="text-align: center; font-size: 1.2em; font-style: italic; margin-bottom: 2em;">¡Tus paquetes llegan Ya!
-    </p>
-    <form id="envioForm">
-      <label for="codigoPaquete">Código de Paquete:</label>
-      <input type="text" id="codigoPaquete" required placeholder="Ej: PAQ001">
-
-      <label for="valorEnvio">Valor del Envío:</label>
-      <input type="number" id="valorEnvio" required placeholder="Ej: 1500" min="0" step="100">
-
-      <label for="destino">Destino:</label>
-      <input type="text" id="destino" required placeholder="Ej: Calle Principal 123, Ciudad">
-
-      <label for="origen">Origen:</label>
-      <input type="text" id="origen" required placeholder="Ej: Calle Secundaria 456, Ciudad">
-
-      <label for="distancia">Distancia (estimada):</label>
-      <input type="text" id="distancia" required placeholder="Ej: 2 km">
-
-      <label for="numeroRepartidor">Número del Repartidor:</label>
-      <input type="text" id="numeroRepartidor" required placeholder="Ej: 1234567890 (sin + o guiones)">
-
-      <button type="submit">Enviar vía WhatsApp</button>
-      <button type="button" onclick="llamarRepartidor()" style="background-color: #128C7E;">Llamar vía WhatsApp</button>
-    </form>
 
     <h3>Historial de Envíos</h3>
-    <div id="orderHistory">
-      <!-- Aquí se cargarán los envíos guardados -->
-    </div>
-
-    <div class="footer" style="border-top: none; display: flex; justify-content: space-between; align-items: center;">
-      <button onclick="volverAtras()" style="background-color: #6c757d; 
-                     width: auto; 
-                     padding: 5px 15px; 
-                     font-size: 0.8rem;">
-        Volver atrás
-      </button>
-      <button onclick="window.open('https://wa.me/5491135723388', '_blank')" style="background-color: #dc3545; 
-                     width: auto; 
-                     padding: 5px 15px; 
-                     font-size: 0.8rem;">
-        Ayuda
-      </button>
-    </div>
-  </div>
+    <div id="orderHistory">Sin envíos aún.</div>
+    <button onclick="cerrarSesion('negocio')" style="background-color:#dc3545">Cerrar Sesión</button>
   </div>
 
   <script>
-    function showContent() {
-      document.getElementById('startButton').style.display = 'none';
-      document.getElementById('mainContent').style.display = 'block';
-    }
-    let repartidorSeleccionado = null;
+    let agendaRepartidores = [];
 
-    function seleccionarRepartidor(numero, nombre, entregas) {
-      repartidorSeleccionado = {numero, nombre, entregas};
-      document.getElementById('numeroRepartidor').value = numero;
-
-      // Actualizar visualización de botones
-      document.querySelectorAll('.repartidor-btn').forEach(btn => {
-        btn.classList.remove('selected');
-        if (btn.textContent.includes(nombre)) {
-          btn.classList.add('selected');
-        }
-      });
-    }
-
-    function construirURL(codigoPaquete, destino, origen, distancia, numero, valorEnvio) {
-      const mensaje = `Hola, tengo un envío (Código: ${codigoPaquete}) desde ${origen} hacia ${destino} con una distancia estimada de ${distancia}. El valor del envío es: $${valorEnvio}. ¿Podrías atenderlo?`;
-      const mensajeCodificado = encodeURIComponent(mensaje);
-      return `https://wa.me/${numero}?text=${mensajeCodificado}`;
-    }
-
-    function guardarEnvio(envio) {
-      let envios = JSON.parse(localStorage.getItem('envios')) || [];
-      envios.unshift(envio);
-      localStorage.setItem('envios', JSON.stringify(envios));
-    }
-
-    function mostrarHistorial() {
-      const historialDiv = document.getElementById('orderHistory');
-      historialDiv.innerHTML = '';
-      const envios = JSON.parse(localStorage.getItem('envios')) || [];
-
-      if (envios.length === 0) {
-        historialDiv.innerHTML = '<p>No hay envíos registrados.</p>';
-        return;
-      }
-
-      envios.forEach((envio, indice) => {
-        const div = document.createElement('div');
-        div.classList.add('order-item');
-
-        div.innerHTML = `
-          <p><strong>Código:</strong> ${envio.codigoPaquete}</p>
-          <p><strong>Origen:</strong> ${envio.origen}</p>
-          <p><strong>Destino:</strong> ${envio.destino}</p>
-          <p><strong>Distancia:</strong> ${envio.distancia}</p>
-          <p><strong>Número:</strong> ${envio.numero}</p>
-          <button class="btn-reenviar" onclick="reenviarEnvio(${indice})">Reenviar Mensaje</button>
-        `;
-
-        historialDiv.appendChild(div);
-      });
-    }
-
-    function reenviarEnvio(indice) {
-      const envios = JSON.parse(localStorage.getItem('envios')) || [];
-      const envio = envios[indice];
-      const url = construirURL(envio.destino, envio.distancia, envio.numero);
-      window.open(url, '_blank');
-    }
-
-    document.getElementById('envioForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const codigoPaquete = document.getElementById('codigoPaquete').value.trim();
-      const destino = document.getElementById('destino').value.trim();
-      const origen = document.getElementById('origen').value.trim();
-      const distancia = document.getElementById('distancia').value.trim();
-      const numero = document.getElementById('numeroRepartidor').value.trim();
-
-      if (codigoPaquete === '' || destino === '' || origen === '' || distancia === '' || numero === '') {
-        alert('Por favor, completá todos los campos.');
-        return;
-      }
-
-      const valorEnvio = document.getElementById('valorEnvio').value.trim();
-      const urlWhatsApp = construirURL(codigoPaquete, destino, origen, distancia, numero, valorEnvio);
-
-      guardarEnvio({codigoPaquete, origen, destino, distancia, numero});
-      mostrarHistorial();
-
-      window.open(urlWhatsApp, '_blank');
-
-      document.getElementById('envioForm').reset();
-    });
-
-    function llamarRepartidor() {
-      const numero = document.getElementById('numeroRepartidor').value.trim();
-      if (numero) {
-        window.open(`https://wa.me/${numero}`, '_blank');
-      } else {
-        alert('Por favor, ingresa el número del repartidor');
+    function mostrarLogin(tipo) {
+      document.getElementById('pantallaInicio').style.display = 'none';
+      if (tipo === 'negocio') {
+        document.getElementById('loginNegocio').style.display = 'block';
       }
     }
 
-    function volverAtras() {
-      document.getElementById('mainContent').style.display = 'none';
-      document.getElementById('startButton').style.display = 'block';
+    function accederNegocio() {
+      document.getElementById('loginNegocio').style.display = 'none';
+      document.getElementById('panelNegocio').style.display = 'block';
+      mostrarNotificacionNegocio("Bienvenido al panel de tu negocio.");
+      cargarAgendaRepartidores();
     }
 
-    window.onload = function () {
-      mostrarHistorial();
+    function cerrarSesion(tipo) {
+      if (tipo === 'negocio') {
+        document.getElementById('panelNegocio').style.display = 'none';
+        document.getElementById('pantallaInicio').style.display = 'block';
+      }
     }
-  </script>
-</body>
 
-</html>
+    function enviarWhatsApp() {
+      const codigo = document.querySelector('input[placeholder="Código de paquete"]').value;
+      const valor = document.querySelector('input[placeholder="Valor del envío"]').value;
+      const origen = document.querySelector('input[placeholder="Dirección de origen"]').value;
+      const destino = document.querySelector('input[placeholder="Dirección de destino"]').value;
+      const repartidor = document.querySelector('#selectRepartidor').value;
+      const mensaje = `Nuevo Envío:\nCódigo: ${codigo}\nValor: $${valor}\nOrigen: ${origen}\nDestino: ${destino}\nRepartidor: ${repartidor}`;
+
+      window.open(`https://wa.me/${repartidor}?text=${encodeURIComponent(mensaje)}`, '_blank');
+    }
+
+    function agregarRepartidor() {
+      const nombre = document.getElementById('nombreRepartidor').value;
+      const telefono = document.getElementById('telefonoRepartidor').value;
+      if (nombre && telefono) {
+        agendaRepartidores.push({ nombre, telefono });
+        mostrarNotificacionNegocio(`Repartidor ${nombre} agregado.`);
+        cargarAgendaRepartidores();
+        
